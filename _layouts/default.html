@@ -4,78 +4,227 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <style>
-        /* Gør at siden glider pænt ned, når man klikker i menuen */
+        /* --- DEN VARME BRUNE FARVEPALETTE (BEWARET) --- */
+        :root {
+            --bg-color: #faf7f2; 
+            --text-color: #4a3f35; 
+            --accent-color: #8c7b6e;
+            --highlight-color: #a67c52;
+            --hover-color: #6b4e31;
+        }
+
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: "Georgia", "Times New Roman", serif;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Libre Baskerville', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            /* INTERAKTIV BAGGRUND: Genindsat tekstur */
+            background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.9), rgba(250, 247, 242, 0.8)), url('/assets/grain.png');
+            background-attachment: fixed;
             margin: 0;
-            padding: 40px 20px;
-            max-width: 960px;
+            padding: 60px 20px;
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
             display: flex;
-            gap: 60px;
+            gap: 80px;
         }
-        
+
+        /* --- SIDEBAR --- */
         header {
             width: 220px;
             flex-shrink: 0;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            position: sticky; /* Gør at menuen bliver hængende når man scroller */
-            top: 40px;
+            font-family: 'Inter', sans-serif;
+            position: sticky;
+            top: 60px;
             height: fit-content;
         }
 
-        header h1 { font-size: 1.2rem; margin-top: 0; font-weight: bold; }
-        
-        nav ul { list-style: none; padding: 0; }
-        nav li { margin-bottom: 8px; }
-        
-        nav a { text-decoration: none; color: #666; font-size: 0.9rem; }
-        nav a:hover { color: #000; text-decoration: underline; }
-
-        main { flex-grow: 1; max-width: 600px; }
-
-        /* Sørger for luft over overskrifter når man hopper til dem */
-        h2 { 
-            font-weight: normal; 
-            font-size: 1.5rem; 
-            margin-top: 60px; /* Mere luft mellem sektioner */
-            padding-top: 20px; 
+        /* --- PORTRÆTBILLEDET (RETTET TIL FIRKANTET) --- */
+        .profile-image {
+            width: 180px; /* Lidt bredere nu hvor det er firkantet */
+            height: auto; /* Justerer automatisk højden så billedet ikke bliver mast */
+            max-height: 250px; /* Sikrer at det ikke bliver for højt hvis det er et portrætformat */
+            border-radius: 6px; /* Helt let afrundede hjørner (ser pænere ud end skarpe) */
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 4px solid #ede6db; /* Rammen er bevaret */
+            box-shadow: 0 4px 12px rgba(74, 63, 53, 0.1); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .socials { margin-top: 30px; }
+        .profile-image:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(74, 63, 53, 0.15);
+        }
 
-        @media (max-width: 700px) {
-            body { flex-direction: column; gap: 20px; }
-            header { width: 100%; position: relative; top: 0; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        header h1 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        header p.tagline {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        nav ul { list-style: none; padding: 0; margin: 0; }
+        nav li { margin-bottom: 8px; }
+
+        nav a {
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s, padding-left 0.2s;
+        }
+
+        nav a:hover { 
+            color: var(--text-color);
+            padding-left: 5px;
+        }
+
+        .socials { 
+            margin-top: 40px; 
+            padding-top: 20px;
+            border-top: 1px solid #e0d6c8;
+        }
+        
+        .socials p {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* --- INDHOLD --- */
+        main { flex-grow: 1; max-width: 620px; }
+
+        h2 { 
+            font-family: 'Inter', sans-serif;
+            font-weight: 600; 
+            font-size: 1.5rem; 
+            margin-top: 80px; 
+            margin-bottom: 25px;
+            color: var(--text-color);
+            letter-spacing: -0.03em;
+        }
+
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        p { margin-bottom: 1.6em; }
+
+        /* Links i teksten (Varm stil) */
+        main a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 2px solid var(--highlight-color);
+            transition: all 0.2s;
+        }
+
+        main a:hover {
+            background-color: var(--highlight-color);
+            color: #fff;
+        }
+
+        /* --- GITHUB WIDGET CSS (Varm stil) --- */
+        #github-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            border: 1px solid #e0d6c8;
+            background: #fffbf7;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none !important;
+            border-bottom: none !important;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(74, 63, 53, 0.1);
+            border-color: var(--highlight-color);
+        }
+
+        .project-card h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.1rem;}
+        .project-card p { font-size: 0.9rem; margin-bottom: 15px; line-height: 1.5; color: var(--accent-color); flex-grow: 1;}
+        
+        .repo-stats {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: var(--highlight-color);
+            display: flex;
+            gap: 15px;
+            font-weight: 600;
+        }
+
+        /* --- MOBIL --- */
+        @media (max-width: 768px) {
+            body { flex-direction: column; gap: 40px; padding: 30px 20px; background-attachment: scroll;}
+            header { 
+                width: 100%; position: relative; top: 0; 
+                border-bottom: 1px solid #e0d6c8; padding-bottom: 30px; 
+                text-align: center;
+            }
+            .profile-image { margin-left: auto; margin-right: auto; display: block; }
+            .socials { border-top: none; margin-top: 20px; padding-top: 0; }
+            #github-projects { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header>
+        <img src="/assets/mig.jpg" alt="Portræt" class="profile-image">
+        
         <h1>Dit Navn</h1>
-        <p style="font-size: 0.9em; color: #888;">Freelancer & Udvikler</p>
+        <p class="tagline">Freelancer, Udvikler &<br>Digital Håndværker.</p>
         
         <nav>
             <ul>
                 <li><a href="#intro">Intro</a></li>
-                <li><a href="#projekter">Projekter</a></li>
+                <li><a href="#github">Seneste Projekter</a></li>
+                <li><a href="#om">Om mig</a></li>
                 <li><a href="#kontakt">Kontakt</a></li>
             </ul>
         </nav>
         
         <nav class="socials">
-            <p style="font-size: 0.8em; font-weight: bold; color: #999; margin-bottom: 5px;">FIND MIG PÅ</p>
+            <p>CONNECT</p>
             <ul>
-                <li><a href="https://linkedin.com/in/ditnavn" target="_blank">LinkedIn</a></li>
-                <li><a href="https://github.com/ditnavn" target="_blank">GitHub</a></li>
-                <li><a href="https://twitter.com/ditnavn" target="_blank">X / Twitter</a></li>
+                <li><a href="https://linkedin.com/in/ditnavn" target="_blank">LinkedIn ↗</a></li>
+                <li><a href="https://github.com/ditnavn" target="_blank">GitHub ↗</a></li>
             </ul>
         </nav>
     </header>
@@ -83,6 +232,41 @@
     <main>
         {{ content }}
     </main>
+
+    <script>
+        // HUSK AT RETTE BRUGERNAVN:
+        const githubUsername = 'dennisoersted'; 
+
+        async function fetchGitHubProjects() {
+            const container = document.getElementById('github-projects');
+            if (!container) return;
+
+            try {
+                const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=pushed&per_page=6`);
+                if (!response.ok) throw new Error('Kunne ikke hente projekter');
+                const repos = await response.json();
+                container.innerHTML = '';
+                repos.forEach(repo => {
+                    const description = repo.description ? repo.description : 'Ingen beskrivelse tilgængelig.';
+                    const cardHTML = `
+                        <a href="${repo.html_url}" target="_blank" class="project-card">
+                            <h3>${repo.name}</h3>
+                            <p>${description}</p>
+                            <div class="repo-stats">
+                                <span>★ ${repo.stargazers_count} Stars</span>
+                                <span>Type: ${repo.language || 'Diverse'}</span>
+                            </div>
+                        </a>
+                    `;
+                    container.innerHTML += cardHTML;
+                });
+            } catch (error) {
+                container.innerHTML = '<p>Kunne ikke indlæse projekter lige nu. Besøg min GitHub i stedet.</p>';
+                console.error('GitHub Widget Fejl:', error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', fetchGitHubProjects);
+    </script>
 
 </body>
 </html>
