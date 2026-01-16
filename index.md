@@ -3,8 +3,6 @@ layout: default
 title: Dennis Ørsted Petersen
 ---
 
-Jeg er fascineret af mønstre i data. Jeg bygger modeller, der omsætter komplekse tal til forståelige indsigter. 
+I balance my studies in Data Science at SDU with a position as an HR Consultant at OUH.
 
-Til daglig arbejder jeg med **Machine Learning**, **Big Data** og **Cloud Architecture**. Jeg tror på, at den bedste kode er den, der både er effektiv og læsbar for mennesker.
-
-Når jeg ikke sidder foran skærmen, finder du mig sandsynligvis i gang med at optimere noget, der slet ikke behøvede optimering.
+I believe that the most effective solutions are found where hard data meets human understanding. I strive to apply my analytical skills to create tangible value, translating complex datasets into actionable strategies.
