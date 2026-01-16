@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="da">
-<head>
+<html lang="da" data-theme="dark"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
@@ -8,20 +7,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-
     <style>
-        /* --- DESIGN SYSTEM (Samme varme farver) --- */
+        /* --- FARVETEMAER (VARIABLES) --- */
         :root {
+            /* STANDARD: DARK MODE (Deep Espresso) */
+            --bg-color: #13100e;        /* Næsten sort/brun */
+            --card-bg: #1c1816;         /* Lidt lysere til kort */
+            --text-color: #e6e0d4;      /* Varm off-white */
+            --accent-color: #9c8e85;    /* Grå-brun */
+            --highlight-color: #c49667; /* Kobber */
+            --code-color: #ff9e64;      /* Lysere orange til mørk baggrund */
+            --border-color: #332b26;
+            --soft-radius: 24px;
+            --grain-opacity: 0.04;      /* Meget lav opacity = Mindre tydelig */
+        }
+
+        /* LIGHT MODE OVERRIDE (Creamy Latte) */
+        [data-theme="light"] {
             --bg-color: #f7f5f0;
+            --card-bg: #ffffff;
             --text-color: #2c2420;
             --accent-color: #6e635b;
             --highlight-color: #a67c52;
             --code-color: #d65d0e;
-            /* Ny variabel for det organiske look */
-            --soft-radius: 24px; 
+            --border-color: #e0d6c8;
+            --grain-opacity: 0.08;      /* Lidt mere synlig på lys baggrund */
         }
 
         @keyframes fadeIn {
@@ -37,21 +49,31 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
-            /* Den kornede tekstur bevares */
-            background-image: url('/assets/grain.png');
-            background-repeat: repeat;
-            background-blend-mode: multiply; 
             margin: 0; padding: 0;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* --- NY GRAIN LØSNING (BEDRE KONTROL) --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('/assets/grain.png');
+            opacity: var(--grain-opacity); /* Her styrer vi tydeligheden */
+            pointer-events: none; /* Klik går igennem laget */
+            z-index: 500;
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 40px 30px 80px;
+            position: relative;
+            z-index: 1; /* Sikrer indhold ligger over grain */
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION & THEME TOGGLE --- */
         nav.top-nav {
             display: flex;
             justify-content: space-between;
@@ -60,20 +82,29 @@
             font-family: 'Fira Code', monospace;
             font-size: 0.85rem;
         }
+
         .nav-brand { font-weight: 700; color: var(--text-color); text-decoration: none;}
+
+        .nav-right { display: flex; align-items: center; gap: 30px; }
         nav.top-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; }
+        
         nav.top-nav a { text-decoration: none; color: var(--accent-color); font-weight: 500; transition: color 0.2s; }
         nav.top-nav a:hover { color: var(--code-color); }
 
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none; border: none; cursor: pointer;
+            color: var(--accent-color); font-size: 1.1rem;
+            transition: color 0.2s, transform 0.2s;
+            padding: 5px;
+        }
+        .theme-toggle:hover { color: var(--highlight-color); transform: rotate(15deg); }
 
-        /* --- ORGANISK HERO SEKTION --- */
+
+        /* --- HERO SEKTION --- */
         .hero-split {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 60px;
-            align-items: center;
-            margin-bottom: 100px;
-            animation: fadeIn 0.8s ease-out;
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px;
+            align-items: center; margin-bottom: 100px; animation: fadeIn 0.8s ease-out;
         }
 
         .hero-text h1 {
@@ -90,107 +121,66 @@
             font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--text-color); opacity: 0.9;
         }
 
-        /* Knappen er nu "pille-formet" */
         .hero-btn {
             display: inline-block; margin-top: 25px; padding: 12px 28px;
-            background: var(--text-color); color: #fff; text-decoration: none;
-            font-family: 'Fira Code', monospace; font-size: 0.9rem;
-            border-radius: 50px; /* Gør den helt rund */
-            transition: transform 0.2s ease, background 0.2s ease;
+            background: var(--text-color); color: var(--bg-color); /* Inverterede farver */
+            text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.9rem;
+            border-radius: 50px; font-weight: 600;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
-        .hero-btn:hover { transform: translateY(-3px); background: var(--code-color); }
+        .hero-btn:hover { transform: translateY(-3px); opacity: 0.9; }
 
-
-        /* Billedet er nu meget mere organisk og blødt */
         .hero-image {
-            width: 100%; height: auto;
-            /* Meget afrundede hjørner */
-            border-radius: 40px; 
-            /* Blød, lækker skygge i stedet for den hårde */
-            box-shadow: 0 25px 50px -12px rgba(166, 124, 82, 0.25);
+            width: 100%; height: auto; border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); /* Mørkere skygge til dark mode */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .hero-image:hover {
-            transform: translateY(-5px) scale(1.01);
-            box-shadow: 0 35px 60px -15px rgba(166, 124, 82, 0.3);
-        }
+        .hero-image:hover { transform: translateY(-5px) scale(1.01); }
 
-
-        /* --- INDHOLD & PROJEKTER --- */
+        /* --- INDHOLD --- */
         h2 { 
             font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.8rem; 
             margin-top: 80px; margin-bottom: 40px; display: flex; align-items: center; gap: 15px;
         }
-        h2::after { content: ''; flex-grow: 1; height: 2px; background: #e0d6c8; border-radius: 2px; }
+        h2::after { content: ''; flex-grow: 1; height: 2px; background: var(--border-color); border-radius: 2px; }
 
         #github-projects {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;
         }
 
-        /* Projektkortene er mere runde */
         .project-card {
-            background: #fff;
-            border: 2px solid #f2efe9; /* Lidt tykkere, blødere kant */
-            padding: 30px;
-            border-radius: var(--soft-radius); /* Organiske hjørner */
-            text-decoration: none !important;
-            display: flex; flex-direction: column;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* 'Spring' animation */
-            position: relative;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            padding: 30px; border-radius: var(--soft-radius);
+            text-decoration: none !important; display: flex; flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        
         .project-card:hover {
-            border-color: transparent;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08); /* Blød skygge ved hover */
+            border-color: var(--code-color); transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
         }
 
-        .project-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; margin: 0 0 10px 0; color: #000;}
+        .project-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; margin: 0 0 10px 0; color: var(--text-color);}
         .project-card p { font-size: 0.95rem; color: var(--accent-color); flex-grow: 1; margin-bottom: 20px;}
+        
         .repo-stats {
             font-family: 'Fira Code', monospace; font-size: 0.75rem;
             color: var(--highlight-color); display: flex; gap: 15px; font-weight: 500;
-            border-top: 1px solid #f0f0f0; padding-top: 15px;
+            border-top: 1px solid var(--border-color); padding-top: 15px;
         }
 
-
-        /* --- NY KONTAKT SEKTION MED IKONER --- */
-        .contact-section {
-            text-align: center;
-            margin-top: 120px;
-            margin-bottom: 60px;
-        }
-        
-        .contact-icons {
-            display: flex;
-            justify-content: center;
-            gap: 35px; /* Plads mellem ikoner */
-            margin-top: 30px;
-        }
-
-        .contact-icons a {
-            color: var(--accent-color);
-            font-size: 2.2rem; /* Store ikoner */
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        /* Organisk bevægelse når man peger på ikonerne */
-        .contact-icons a:hover {
-            color: var(--code-color);
-            transform: translateY(-5px) scale(1.1);
-        }
-
+        /* --- CONTACT --- */
+        .contact-section { text-align: center; margin-top: 120px; margin-bottom: 60px; }
+        .contact-icons { display: flex; justify-content: center; gap: 35px; margin-top: 30px; }
+        .contact-icons a { color: var(--accent-color); font-size: 2.2rem; transition: all 0.3s ease; display: inline-block; }
+        .contact-icons a:hover { color: var(--code-color); transform: translateY(-5px) scale(1.1); }
 
         /* --- MOBIL --- */
         @media (max-width: 800px) {
             .hero-split { grid-template-columns: 1fr; gap: 40px; text-align: center; }
             .hero-image-container { margin: 0 auto; width: 85%; }
-            .hero-image { border-radius: 30px; } /* Lidt mindre runding på mobil */
-            h2::after { display: none; }
             nav.top-nav { flex-direction: column; gap: 20px; }
-            .contact-icons { gap: 25px; font-size: 1.8rem; }
+            .nav-right { flex-direction: column; gap: 20px; }
         }
     </style>
 </head>
@@ -200,10 +190,16 @@
     
     <nav class="top-nav">
         <a href="/" class="nav-brand">~/dit-navn</a>
-        <ul>
-            <li><a href="#projekter">Projekter</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-        </ul>
+        
+        <div class="nav-right">
+            <ul>
+                <li><a href="#projekter">Projekter</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" title="Skift Dark/Light mode">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+        </div>
     </nav>
 
     <section class="hero-split">
@@ -228,28 +224,26 @@
 
     <section id="kontakt" class="contact-section">
         <h2>Let's Connect</h2>
-        <p style="max-width: 600px; margin: 0 auto;">Find mig på de forskellige platforme, hvis du vil nørde data eller bare sige hej.</p>
+        <p style="max-width: 600px; margin: 0 auto; color: var(--accent-color);">
+            Find mig på de forskellige platforme, hvis du vil nørde data eller bare sige hej.
+        </p>
         
         <div class="contact-icons">
-            <a href="mailto:din@email.dk" title="Send en email"><i class="fa-solid fa-envelope"></i></a>
-            
-            <a href="https://linkedin.com/in/ditbrugernavn" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            
-            <a href="https://github.com/ditbrugernavn" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
-            
-            <a href="https://facebook.com/ditbrugernavn" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
-
-            <a href="https://mastodon.social/@ditbrugernavn" target="_blank" title="Fediverse"><i class="fa-brands fa-mastodon"></i></a>
+            <a href="mailto:din@email.dk"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://linkedin.com/in/ditbrugernavn" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/ditbrugernavn" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://mastodon.social/@ditbrugernavn" target="_blank"><i class="fa-brands fa-mastodon"></i></a>
         </div>
     </section>
 
-    <footer style="margin-top: 80px; text-align: center; color: var(--accent-color); font-size: 0.8rem; font-family: 'Fira Code'; opacity: 0.7;">
-        <p>git commit -m "final polish & organic feel"</p>
+    <footer style="margin-top: 80px; text-align: center; color: var(--accent-color); font-size: 0.8rem; font-family: 'Fira Code'; opacity: 0.5;">
+        <p>git commit -m "added dark mode & coffee"</p>
     </footer>
 
 </div>
 
 <script>
+    // --- TYPEWRITER (Samme som før) ---
     const phrases = ['Data Scientist', 'Machine Learning', 'Python Expert', 'Coffee Driven'];
     let phraseIndex = 0, letterIndex = 0, isDeleting = false;
     const textEl = document.getElementById('typed-text');
@@ -271,7 +265,42 @@
     }
     document.addEventListener('DOMContentLoaded', type);
 
-    // --- HUSK AT RETTE HER ---
+    // --- DARK MODE LOGIK ---
+    const toggleBtn = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+    const icon = toggleBtn.querySelector('i');
+
+    // Tjek om brugeren har gemt et valg tidligere
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        htmlEl.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+    } else {
+        // Hvis ingen præference, start i dark (det er standard i HTML tagget nu)
+        updateIcon('dark');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        const currentTheme = htmlEl.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        htmlEl.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme); // Gem valg i browseren
+        updateIcon(newTheme);
+    });
+
+    function updateIcon(theme) {
+        if (theme === 'light') {
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        } else {
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    }
+
+
+    // --- GITHUB WIDGET (HUSK AT RETTE BRUGERNAVN) ---
     const githubUser = 'DIT-GITHUB-BRUGERNAVN'; 
 
     async function getRepos() {
