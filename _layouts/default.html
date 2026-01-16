@@ -7,266 +7,290 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
     <style>
-        /* --- DEN VARME BRUNE FARVEPALETTE (BEWARET) --- */
+        /* --- FARVEPALETTE (BEVARET VARM STIL) --- */
         :root {
             --bg-color: #faf7f2; 
-            --text-color: #4a3f35; 
+            --text-color: #3e342c; 
             --accent-color: #8c7b6e;
             --highlight-color: #a67c52;
-            --hover-color: #6b4e31;
+            --code-color: #d65d0e; /* En nørdet orange-brun til kode-tekst */
         }
+
+        /* --- GLOBALE ANIMATIONER --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Gør at ting fader ind i rækkefølge */
+        .animate-1 { animation: fadeInUp 0.6s ease forwards; opacity: 0; }
+        .animate-2 { animation: fadeInUp 0.6s ease forwards 0.2s; opacity: 0; }
+        .animate-3 { animation: fadeInUp 0.6s ease forwards 0.4s; opacity: 0; }
+        .animate-4 { animation: fadeInUp 0.6s ease forwards 0.6s; opacity: 0; }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Libre Baskerville', Georgia, serif;
+            font-family: 'Inter', sans-serif; /* Mere moderne grundfont */
             font-size: 18px;
-            line-height: 1.8;
+            line-height: 1.7;
             color: var(--text-color);
             background-color: var(--bg-color);
-            /* INTERAKTIV BAGGRUND: Genindsat tekstur */
-            background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.9), rgba(250, 247, 242, 0.8)), url('/assets/grain.png');
+            background-image: linear-gradient(to bottom, rgba(250, 247, 242, 0.95), rgba(250, 247, 242, 0.85)), url('/assets/grain.png');
             background-attachment: fixed;
             margin: 0;
-            padding: 60px 20px;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
+            padding: 0;
+        }
+
+        /* Hovedcontaineren der centrerer alt */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px 80px;
+        }
+
+        /* --- NAVIGATION (TOPPEN) --- */
+        nav.top-nav {
             display: flex;
-            gap: 80px;
-        }
-
-        /* --- SIDEBAR --- */
-        header {
-            width: 220px;
-            flex-shrink: 0;
-            font-family: 'Inter', sans-serif;
-            position: sticky;
-            top: 60px;
-            height: fit-content;
-        }
-
-        /* --- PORTRÆTBILLEDET (RETTET TIL FIRKANTET) --- */
-        .profile-image {
-            width: 180px; /* Lidt bredere nu hvor det er firkantet */
-            height: auto; /* Justerer automatisk højden så billedet ikke bliver mast */
-            max-height: 250px; /* Sikrer at det ikke bliver for højt hvis det er et portrætformat */
-            border-radius: 6px; /* Helt let afrundede hjørner (ser pænere ud end skarpe) */
-            object-fit: cover;
-            margin-bottom: 25px;
-            border: 4px solid #ede6db; /* Rammen er bevaret */
-            box-shadow: 0 4px 12px rgba(74, 63, 53, 0.1); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .profile-image:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 16px rgba(74, 63, 53, 0.15);
-        }
-
-        header h1 {
-            font-size: 1.2rem;
-            margin-top: 0;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 5px;
-            color: var(--text-color);
-        }
-
-        header p.tagline {
+            justify-content: flex-end; /* Skubber links til højre */
+            padding-bottom: 40px;
+            font-family: 'Fira Code', monospace; /* Nørdet font til menu */
             font-size: 0.9rem;
-            color: var(--accent-color);
-            margin-top: 0;
+        }
+
+        nav.top-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; }
+        nav.top-nav a { 
+            text-decoration: none; color: var(--accent-color); font-weight: 600; transition: color 0.2s; 
+            position: relative;
+        }
+        /* Subtle hover streg under links */
+        nav.top-nav a::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
+            background-color: var(--highlight-color); transition: width 0.3s ease;
+        }
+        nav.top-nav a:hover { color: var(--text-color); }
+        nav.top-nav a:hover::after { width: 100%; }
+
+
+        /* --- HERO SEKTION (CENTRERET) --- */
+        .hero {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .profile-image {
+            width: 160px; height: 160px;
+            /* HUSK at bruge det kvadratiske billede du lavede sidst */
+            object-fit: cover;
+            border-radius: 12px; /* Moderne afrundede hjørner */
+            box-shadow: 0 10px 25px rgba(74, 63, 53, 0.15);
             margin-bottom: 30px;
-            line-height: 1.4;
+            transform: rotate(-2deg); /* Lille nørdet tilt */
+            transition: transform 0.3s ease;
         }
+        .profile-image:hover { transform: rotate(0deg) scale(1.05); }
 
-        nav ul { list-style: none; padding: 0; margin: 0; }
-        nav li { margin-bottom: 8px; }
-
-        nav a {
-            text-decoration: none;
-            color: var(--accent-color);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.2s, padding-left 0.2s;
-        }
-
-        nav a:hover { 
-            color: var(--text-color);
-            padding-left: 5px;
-        }
-
-        .socials { 
-            margin-top: 40px; 
-            padding-top: 20px;
-            border-top: 1px solid #e0d6c8;
-        }
-        
-        .socials p {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        /* --- INDHOLD --- */
-        main { flex-grow: 1; max-width: 620px; }
-
-        h2 { 
+        h1 {
             font-family: 'Inter', sans-serif;
-            font-weight: 600; 
-            font-size: 1.5rem; 
-            margin-top: 80px; 
-            margin-bottom: 25px;
-            color: var(--text-color);
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
             letter-spacing: -0.03em;
         }
 
-        h3 {
-            font-family: 'Inter', sans-serif;
+        /* Typewriter effekten */
+        .tech-tagline {
+            font-family: 'Fira Code', monospace;
+            color: var(--code-color);
             font-weight: 600;
-            font-size: 1.2rem;
-            margin-top: 40px;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            min-height: 1.7em; /* Sikrer plads så siden ikke hopper */
+        }
+        /* Den blinkende cursor */
+        .cursor { animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+
+        .intro-text {
+            font-family: 'Libre Baskerville', serif; /* Serif kun til intro-teksten for elegance */
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin: 0 auto;
             color: var(--text-color);
         }
 
-        p { margin-bottom: 1.6em; }
-
-        /* Links i teksten (Varm stil) */
-        main a {
-            color: var(--text-color);
-            text-decoration: none;
-            border-bottom: 2px solid var(--highlight-color);
-            transition: all 0.2s;
+        /* --- SEKTIONER & INDHOLD --- */
+        h2 { 
+            font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.8rem; 
+            text-align: center; margin-top: 60px; margin-bottom: 40px; 
+            position: relative; display: inline-block; left: 50%; transform: translateX(-50%);
+        }
+        /* Lille streg under overskrifter */
+        h2::after {
+            content: ''; display: block; width: 40px; height: 3px; background: var(--highlight-color);
+            margin: 10px auto 0; opacity: 0.5;
         }
 
-        main a:hover {
-            background-color: var(--highlight-color);
-            color: #fff;
-        }
-
-        /* --- GITHUB WIDGET CSS (Varm stil) --- */
+        /* --- GITHUB WIDGET (MODERNE) --- */
         #github-projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
         }
 
         .project-card {
-            border: 1px solid #e0d6c8;
-            background: #fffbf7;
-            padding: 20px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            background: #fff;
+            border: 2px solid #f0eadd;
+            padding: 25px;
+            border-radius: 12px;
             text-decoration: none !important;
-            border-bottom: none !important;
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Lækker 'spring' animation */
+            position: relative; top: 0;
         }
         
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(74, 63, 53, 0.1);
+            transform: translateY(-8px); /* Løfter sig mere op */
+            box-shadow: 0 15px 30px rgba(74, 63, 53, 0.12);
             border-color: var(--highlight-color);
         }
 
-        .project-card h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.1rem;}
-        .project-card p { font-size: 0.9rem; margin-bottom: 15px; line-height: 1.5; color: var(--accent-color); flex-grow: 1;}
+        .project-card h3 { font-family: 'Fira Code', monospace; margin: 0 0 15px 0; font-size: 1.1rem; color: #000;}
+        .project-card p { font-size: 0.95rem; margin-bottom: 20px; line-height: 1.6; color: var(--accent-color); flex-grow: 1;}
         
         .repo-stats {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            color: var(--highlight-color);
-            display: flex;
-            gap: 15px;
-            font-weight: 600;
+            font-family: 'Fira Code', monospace; font-size: 0.8rem;
+            color: var(--highlight-color); display: flex; gap: 15px; font-weight: 600;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center; margin-top: 80px; padding-top: 40px;
+            border-top: 1px solid #e0d6c8; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: var(--accent-color);
         }
 
         /* --- MOBIL --- */
-        @media (max-width: 768px) {
-            body { flex-direction: column; gap: 40px; padding: 30px 20px; background-attachment: scroll;}
-            header { 
-                width: 100%; position: relative; top: 0; 
-                border-bottom: 1px solid #e0d6c8; padding-bottom: 30px; 
-                text-align: center;
-            }
-            .profile-image { margin-left: auto; margin-right: auto; display: block; }
-            .socials { border-top: none; margin-top: 20px; padding-top: 0; }
-            #github-projects { grid-template-columns: 1fr; }
+        @media (max-width: 600px) {
+            nav.top-nav { justify-content: center; }
+            h1 { font-size: 2rem; }
+            .container { padding-top: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <img src="/assets/mig.jpg" alt="Portræt" class="profile-image">
+<div class="container">
+    <nav class="top-nav animate-1">
+        <ul>
+            <li><a href="#projekter">Projekter</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="https://github.com/ditnavn" target="_blank">GitHub ↗</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <img src="/assets/mig.jpg" alt="Portræt" class="profile-image animate-1">
         
-        <h1>Dit Navn</h1>
-        <p class="tagline">Freelancer, Udvikler &<br>Digital Håndværker.</p>
+        <h1 class="animate-2">Dit Navn</h1>
         
-        <nav>
-            <ul>
-                <li><a href="#intro">Intro</a></li>
-                <li><a href="#github">Seneste Projekter</a></li>
-                <li><a href="#om">Om mig</a></li>
-                <li><a href="#kontakt">Kontakt</a></li>
-            </ul>
-        </nav>
+        <div class="tech-tagline animate-2">
+            > <span id="typed-text"></span><span class="cursor">_</span>
+        </div>
         
-        <nav class="socials">
-            <p>CONNECT</p>
-            <ul>
-                <li><a href="https://linkedin.com/in/ditnavn" target="_blank">LinkedIn ↗</a></li>
-                <li><a href="https://github.com/ditnavn" target="_blank">GitHub ↗</a></li>
-            </ul>
-        </nav>
-    </header>
+        <div class="intro-text animate-3">
+            {{ content }}
+        </div>
+    </section>
 
-    <main>
-        {{ content }}
-    </main>
+    <section id="projekter" class="animate-4">
+        <h2>Udvalgte Projekter</h2>
+        <div id="github-projects">
+            <p style="text-align: center; font-family: 'Fira Code'">Indlæser data fra GitHub API...</p>
+        </div>
+    </section>
 
-    <script>
-        // HUSK AT RETTE BRUGERNAVN:
-        const githubUsername = 'dennisoersted'; 
+    <footer class="animate-4">
+        <p>Bygget med kaffe, Jekyll og en smule CSS-magi. <br> <code>git push origin master --force</code> (Bare for sjov).</p>
+    </footer>
+</div>
 
-        async function fetchGitHubProjects() {
-            const container = document.getElementById('github-projects');
-            if (!container) return;
+<script>
+    // --- TYPEWRITER EFFEKT ---
+    const textElement = document.getElementById('typed-text');
+    // Ret disse til nørdede titler der passer dig!
+    const phrases = ['Data Scientist.', 'Python Wrangler.', 'Machine Learning Enthusiast.', 'Knuser af CSV-filer.'];
+    let phraseIndex = 0;
+    let letterIndex = 0;
+    let currentPhrase = [];
+    let isDeleting = false;
+    let isEnd = false;
 
-            try {
-                const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=pushed&per_page=6`);
-                if (!response.ok) throw new Error('Kunne ikke hente projekter');
-                const repos = await response.json();
-                container.innerHTML = '';
-                repos.forEach(repo => {
-                    const description = repo.description ? repo.description : 'Ingen beskrivelse tilgængelig.';
-                    const cardHTML = `
-                        <a href="${repo.html_url}" target="_blank" class="project-card">
-                            <h3>${repo.name}</h3>
-                            <p>${description}</p>
-                            <div class="repo-stats">
-                                <span>★ ${repo.stargazers_count} Stars</span>
-                                <span>Type: ${repo.language || 'Diverse'}</span>
-                            </div>
-                        </a>
-                    `;
-                    container.innerHTML += cardHTML;
-                });
-            } catch (error) {
-                container.innerHTML = '<p>Kunne ikke indlæse projekter lige nu. Besøg min GitHub i stedet.</p>';
-                console.error('GitHub Widget Fejl:', error);
-            }
+    function loop() {
+        isEnd = false;
+        textElement.innerHTML = currentPhrase.join('');
+
+        if (isDeleting) {
+            currentPhrase.pop();
+            letterIndex--;
         }
-        document.addEventListener('DOMContentLoaded', fetchGitHubProjects);
-    </script>
+
+        if (!isDeleting && letterIndex <= phrases[phraseIndex].length) {
+            currentPhrase.push(phrases[phraseIndex][letterIndex]);
+            letterIndex++;
+        }
+
+        if (letterIndex == phrases[phraseIndex].length) {
+            isEnd = true; isDeleting = true;
+        }
+
+        if (isDeleting && letterIndex === 0) {
+            currentPhrase = [];
+            isDeleting = false;
+            phraseIndex++;
+            if (phraseIndex === phrases.length) { phraseIndex = 0; }
+        }
+        const speed = isEnd ? 2000 : (isDeleting ? 50 : 100);
+        setTimeout(loop, speed);
+    }
+    loop();
+
+
+    // --- GITHUB WIDGET (Let opdateret) ---
+    // HUSK AT RETTE DIT BRUGERNAVN:
+    const githubUsername = 'DIT-GITHUB-BRUGERNAVN'; 
+
+    async function fetchGitHubProjects() {
+        const container = document.getElementById('github-projects');
+        if (!container) return;
+
+        try {
+            const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=pushed&per_page=6`);
+            if (!response.ok) throw new Error('Kunne ikke hente projekter');
+            const repos = await response.json();
+            container.innerHTML = '';
+            repos.forEach((repo, index) => {
+                const description = repo.description ? repo.description : 'Ingen beskrivelse tilgængelig.';
+                // Vi tilføjer en lille forsinkelse på animationen for hvert kort
+                const delay = index * 0.1;
+                const cardHTML = `
+                    <a href="${repo.html_url}" target="_blank" class="project-card" style="animation: fadeInUp 0.6s ease forwards ${delay}s; opacity: 0;">
+                        <h3>${repo.name}</h3>
+                        <p>${description}</p>
+                        <div class="repo-stats">
+                            <span>★ ${repo.stargazers_count}</span>
+                            <span>{ ${repo.language || 'Code'} }</span>
+                        </div>
+                    </a>
+                `;
+                container.innerHTML += cardHTML;
+            });
+        } catch (error) {
+            container.innerHTML = '<p>Kunne ikke indlæse data. GitHub API sover vist.</p>';
+        }
+    }
+    document.addEventListener('DOMContentLoaded', fetchGitHubProjects);
+</script>
 
 </body>
 </html>

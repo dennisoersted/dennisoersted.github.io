@@ -1,4 +1,3 @@
-title: Dennis Ørsted Petersen
-description: En minimalistisk personlig side
-#theme: jekyll-theme-prime # Vi overskriver dette, men det er godt at have
-url: "https://ditbrugernavn.github.io"
+title: Dit Navn - Data & Code
+description: En personlig portfolio med fokus på data science, algoritmer og digitale løsninger.
+url: "https://dennisoersted.github.io"
