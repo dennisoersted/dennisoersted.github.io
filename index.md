@@ -1,19 +1,41 @@
 ---
 layout: default
-title: Forside
+title: Min Portfolio
 ---
 
-## Velkommen
+## Hej med dig {#intro}
 
-Dette er min nye, simple hjemmeside. Den er designet til at være let at læse og nem at vedligeholde.
+Jeg er en digital håndværker, der bygger simple løsninger på komplekse problemer. Velkommen til min side. 
 
-Ligesom Christopher Newtons side, fokuserer denne på teksten frem for grafikken.
+Her har jeg samlet lidt om, hvad jeg går og roder med, og hvordan du kan få fat i mig.
 
-### Hvad laver jeg?
+---
 
-Her kan du skrive lidt om, hvad du arbejder med.
-* Punkt 1
-* Punkt 2
-* Punkt 3
+## Projekter {#projekter}
 
-Du kan nemt oprette flere sider ved at lave en ny fil, der hedder f.eks. `om.md` og huske at skrive `layout: default` i toppen.
+Her er et udvalg af de ting, jeg har arbejdet på for nylig.
+
+### 1. Webshop Redesign
+**Kunde:** Lokal Tøjbutik  
+Vi optimerede hastigheden på shoppen og gjorde checkout-flowet simplere. Salget steg med 15%.
+[Besøg siden →](https://eksempel.dk)
+
+### 2. Personlig Blog
+**Teknologi:** Jekyll & GitHub Pages  
+Et simpelt skrivested for en forfatter. Fokus på typografi og læsbarhed.
+[Se koden her →](https://github.com/...)
+
+### 3. App Koncept
+En prototype på en app, der hjælper folk med at huske at vande planter. Bygget i Figma og React.
+
+---
+
+## Kontakt {#kontakt}
+
+Jeg er altid åben for en kop kaffe eller en snak om et nyt projekt.
+
+Du kan fange mig på mine sociale medier ude til venstre, eller sende mig en direkte email her:
+
+**Email:** [din@email.dk](mailto:din@email.dk)
+
+Tak fordi du kiggede forbi.
