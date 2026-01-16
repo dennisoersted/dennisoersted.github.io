@@ -10,215 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        /* --- FARVETEMAER --- */
-        :root {
-            /* 1. STANDARD DARK (Espresso) */
-            --bg-color: #13100e;
-            --card-bg: #1c1816;
-            --text-color: #e6e0d4;
-            --accent-color: #9c8e85;
-            --highlight-color: #c49667;
-            --code-color: #ff9e64;
-            --border-color: #332b26;
-            --soft-radius: 24px;
-            --grain-opacity: 0.05;
-            --grain-filter: invert(1); 
-        }
-
-        /* 2. LIGHT MODE (Latte) */
-        [data-theme="light"] {
-            --bg-color: #f7f5f0;
-            --card-bg: #ffffff;
-            --text-color: #2c2420;
-            --accent-color: #6e635b;
-            --highlight-color: #a67c52;
-            --code-color: #d65d0e;
-            --border-color: #e0d6c8;
-            --grain-opacity: 0.08;
-            --grain-filter: none; 
-        }
-
-        /* 3. DRACULA (Vampire) */
-        [data-theme="dracula"] {
-            --bg-color: #282a36;
-            --card-bg: #44475a;
-            --text-color: #f8f8f2;
-            --accent-color: #6272a4;
-            --highlight-color: #bd93f9;
-            --code-color: #ff79c6;
-            --border-color: #6272a4;
-            --grain-opacity: 0.04;
-            --grain-filter: invert(1);
-        }
-
-        /* 4. CATPPUCCIN (Mocha) */
-        [data-theme="catppuccin"] {
-            --bg-color: #1e1e2e;
-            --card-bg: #313244;
-            --text-color: #cdd6f4;
-            --accent-color: #9399b2;
-            --highlight-color: #f9e2af; /* Yellow */
-            --code-color: #fab387;      /* Peach */
-            --border-color: #45475a;
-            --grain-opacity: 0.04;
-            --grain-filter: invert(1);
-        }
-
-        /* 5. MONOKAI (Classic Pro) */
-        [data-theme="monokai"] {
-            --bg-color: #272822;
-            --card-bg: #3e3d32;
-            --text-color: #f8f8f2;
-            --accent-color: #75715e;
-            --highlight-color: #e6db74; /* Yellow */
-            --code-color: #f92672;      /* Pink */
-            --border-color: #75715e;
-            --grain-opacity: 0.05;
-            --grain-filter: invert(1);
-        }
-
-        /* 6. TOKYO NIGHT (Cyberpunk) */
-        [data-theme="tokyo-night"] {
-            --bg-color: #1a1b26;
-            --card-bg: #24283b;
-            --text-color: #a9b1d6;
-            --accent-color: #565f89;
-            --highlight-color: #bb9af7; /* Purple */
-            --code-color: #7aa2f7;      /* Blue */
-            --border-color: #414868;
-            --grain-opacity: 0.05;
-            --grain-filter: invert(1);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            margin: 0; padding: 0;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* GRAIN TEXTURE LAYER */
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('/assets/grain.png');
-            opacity: var(--grain-opacity); 
-            filter: var(--grain-filter);       
-            pointer-events: none; z-index: 500;
-        }
-
-        .container {
-            max-width: 1000px; margin: 0 auto; padding: 40px 30px 80px;
-            position: relative; z-index: 1;
-        }
-
-        /* --- NAVIGATION --- */
-        nav.top-nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding-bottom: 60px; font-family: 'Fira Code', monospace; font-size: 0.85rem;
-        }
-        .nav-brand { font-weight: 700; color: var(--text-color); text-decoration: none;}
-        .nav-right { display: flex; align-items: center; gap: 30px; }
-        nav.top-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; }
-        nav.top-nav a { text-decoration: none; color: var(--accent-color); font-weight: 500; transition: color 0.2s; }
-        nav.top-nav a:hover { color: var(--code-color); }
-        
-        /* Theme Switcher Text Link */
-        #theme-toggle-link {
-            cursor: pointer;
-            color: var(--accent-color);
-            font-weight: 500;
-            transition: color 0.2s;
-            text-decoration: none;
-        }
-        #theme-toggle-link:hover { color: var(--highlight-color); }
-
-        /* --- HERO SEKTION --- */
-        .hero-split {
-            display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px;
-            align-items: center; margin-bottom: 100px; animation: fadeIn 0.8s ease-out;
-        }
-        .hero-text h1 {
-            font-family: 'Inter', sans-serif; font-weight: 800; font-size: 3rem;
-            margin: 0 0 15px 0; line-height: 1.1; letter-spacing: -0.03em;
-        }
-        .hero-text .tagline {
-            font-family: 'Fira Code', monospace; color: var(--code-color);
-            font-size: 1rem; margin-bottom: 25px; display: block; min-height: 1.5em;
-        }
-        .hero-text .intro-bio {
-            font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--text-color); opacity: 0.9;
-        }
-        .hero-btn {
-            display: inline-block; margin-top: 25px; padding: 12px 28px;
-            background: var(--text-color); color: var(--bg-color);
-            text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.9rem;
-            border-radius: 50px; font-weight: 600;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-        .hero-btn:hover { transform: translateY(-3px); opacity: 0.9; }
-        .hero-image {
-            width: 100%; height: auto; border-radius: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .hero-image:hover { transform: translateY(-5px) scale(1.01); }
-
-        /* --- HEADINGS --- */
-        h2 { 
-            font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.8rem; 
-            margin-top: 80px; margin-bottom: 40px; display: flex; align-items: center; gap: 15px;
-        }
-        h2::after { content: ''; flex-grow: 1; height: 2px; background: var(--border-color); border-radius: 2px; }
-
-        /* --- PROJECTS WIDGET --- */
-        #github-projects {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;
-        }
-        .project-card {
-            background: var(--card-bg); border: 2px solid var(--border-color);
-            padding: 30px; border-radius: var(--soft-radius);
-            text-decoration: none !important; display: flex; flex-direction: column;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .project-card:hover {
-            border-color: var(--code-color); transform: translateY(-8px);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
-        }
-        .project-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; margin: 0 0 10px 0; color: var(--text-color);}
-        .project-card p { font-size: 0.95rem; color: var(--accent-color); flex-grow: 1; margin-bottom: 20px;}
-        .repo-stats {
-            font-family: 'Fira Code', monospace; font-size: 0.75rem;
-            color: var(--highlight-color); display: flex; gap: 15px; font-weight: 500;
-            border-top: 1px solid var(--border-color); padding-top: 15px;
-        }
-
-        /* --- CONTACT --- */
-        .contact-section { text-align: center; margin-top: 120px; margin-bottom: 60px; }
-        .contact-icons { display: flex; justify-content: center; gap: 35px; margin-top: 30px; }
-        .contact-icons a { color: var(--accent-color); font-size: 2.2rem; transition: all 0.3s ease; display: inline-block; }
-        .contact-icons a:hover { color: var(--code-color); transform: translateY(-5px) scale(1.1); }
-
-        /* --- MOBIL --- */
-        @media (max-width: 800px) {
-            .hero-split { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-            .hero-image-container { margin: 0 auto; width: 85%; }
-            nav.top-nav { flex-direction: column; gap: 20px; }
-            .nav-right { flex-direction: column; gap: 20px; }
-        }
-    </style>
+    <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
 
@@ -232,7 +24,20 @@
                 <li><a href="#projekter">cd ./projects</a>,</li>
                 <li><a href="#kontakt">cd ./contact</a>,</li>
             </ul>
+            
             <a id="theme-toggle-link">./toggle-theme.sh</a>
+
+            <div class="theme-selector-wrapper">
+                <select id="theme-select" class="theme-select">
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+                    <option value="dracula">Dracula</option>
+                    <option value="catppuccin">Catppuccin</option>
+                    <option value="monokai">Monokai</option>
+                    <option value="tokyo-night">Tokyo Night</option>
+                </select>
+            </div>
+
         </div>
     </nav>
 
@@ -241,7 +46,7 @@
             <h1>Dennis Ørsted Petersen</h1>
             <span class="tagline">> <span id="typed-text"></span><span style="animation: blink 1s infinite">_</span></span>
             <div class="intro-bio">{{ content }}</div>
-            </div>
+        </div>
 
         <div class="hero-image-container">
             <img src="/assets/mig.jpg" alt="Portræt" class="hero-image">
@@ -281,7 +86,7 @@
 </div>
 
 <script>
-    // --- TYPEWRITER EFFECT ---
+    // --- TYPEWRITER ---
     const phrases = ['Data Science Student @ SDU', 'HR Consultant @ OUH', 'Dad @ Home', 'Coffee Driven'];
     let phraseIndex = 0, letterIndex = 0, isDeleting = false;
     const textEl = document.getElementById('typed-text');
@@ -303,46 +108,57 @@
     }
     document.addEventListener('DOMContentLoaded', type);
 
-    // --- MULTI-THEME LOGIC (Dark -> Light -> Dracula -> Catppuccin -> Monokai -> Tokyo Night) ---
+    // --- SYNCHRONIZED THEME LOGIC ---
     const toggleLink = document.getElementById('theme-toggle-link');
+    const themeSelect = document.getElementById('theme-select');
     const htmlEl = document.documentElement;
-
-    // Listen over alle vores temaer
     const themes = ['dark', 'light', 'dracula', 'catppuccin', 'monokai', 'tokyo-night'];
 
-    // Hent gemt tema
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme && themes.includes(savedTheme)) {
-        htmlEl.setAttribute('data-theme', savedTheme);
+    // Funktion der sætter temaet (opdaterer både HTML og Dropdown)
+    function setTheme(themeName) {
+        if (themes.includes(themeName)) {
+            // Sæt tema på HTML
+            htmlEl.setAttribute('data-theme', themeName);
+            // Gem i localStorage
+            localStorage.setItem('theme', themeName);
+            // Opdater dropdown så den matcher
+            if (themeSelect) themeSelect.value = themeName;
+        }
     }
 
+    // 1. Initialiser ved load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else {
+        setTheme('dark');
+    }
+
+    // 2. Klik på Link: Gå til næste tema i listen
     if (toggleLink) {
         toggleLink.addEventListener('click', (e) => {
-            e.preventDefault(); 
-            
-            // Find nuværende tema
-            let currentTheme = htmlEl.getAttribute('data-theme') || 'dark';
-            
-            // Find indekset i listen
-            let currentIndex = themes.indexOf(currentTheme);
-            
-            // Gå til næste tema (bruger modulus % for at starte forfra når vi når enden)
-            let nextIndex = (currentIndex + 1) % themes.length;
-            let newTheme = themes[nextIndex];
-
-            // Anvend tema
-            htmlEl.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
+            e.preventDefault();
+            const currentTheme = htmlEl.getAttribute('data-theme') || 'dark';
+            const currentIndex = themes.indexOf(currentTheme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            setTheme(themes[nextIndex]);
         });
     }
 
-    // --- RANDOM GIT JOKE WIDGET ---
+    // 3. Ændring i Dropdown: Hop direkte til valgt tema
+    if (themeSelect) {
+        themeSelect.addEventListener('change', (e) => {
+            setTheme(e.target.value);
+        });
+    }
+
+    // --- RANDOM GIT JOKE ---
     const gitJokes = [
-        { cmd: 'git -mv -on -up', url: 'https://www.youtube.com/watch?v=6Z66wVo7uNw' }, // Curtis Mayfield
-        { cmd: 'git push it --real-good', url: 'https://www.youtube.com/watch?v=vCadcBR95oU' }, // Salt-N-Pepa
-        { cmd: 'git push origin limit --force', url: 'https://www.youtube.com/watch?v=vT8OU5WtfkQ' }, // Scarface
-        { cmd: 'git blame --on-the-boogie', url: 'https://www.youtube.com/watch?v=nqxVMLVe62U' }, // The Jacksons
-        { cmd: 'git branch grapevine', url: 'https://www.youtube.com/watch?v=hajBdDM2qdg' }, // Marvin Gaye
+        { cmd: 'git -mv -on -up', url: 'https://www.youtube.com/watch?v=6Z66wVo7uNw' }, 
+        { cmd: 'git push it --real-good', url: 'https://www.youtube.com/watch?v=vCadcBR95oU' }, 
+        { cmd: 'git push origin limit --force', url: 'https://www.youtube.com/watch?v=vT8OU5WtfkQ' }, 
+        { cmd: 'git blame --on-the-boogie', url: 'https://www.youtube.com/watch?v=nqxVMLVe62U' }, 
+        { cmd: 'git branch grapevine', url: 'https://www.youtube.com/watch?v=hajBdDM2qdg' }, 
     ];
 
     function randomGitJoke() {
@@ -355,8 +171,7 @@
     }
     document.addEventListener('DOMContentLoaded', randomGitJoke);
 
-
-    // --- GITHUB PROJECTS WIDGET ---
+    // --- GITHUB WIDGET ---
     const githubUser = 'dennisoersted'; 
 
     async function getRepos() {
