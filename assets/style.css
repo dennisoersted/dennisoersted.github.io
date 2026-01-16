@@ -117,53 +117,70 @@ nav.top-nav {
     padding-bottom: 60px; font-family: 'Fira Code', monospace; font-size: 0.85rem;
 }
 .nav-brand { font-weight: 700; color: var(--text-color); text-decoration: none;}
-.nav-right { display: flex; align-items: center; gap: 20px; } /* Gap justeret */
+.nav-right { display: flex; align-items: center; gap: 30px; }
 nav.top-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; }
 nav.top-nav a { text-decoration: none; color: var(--accent-color); font-weight: 500; transition: color 0.2s; }
 nav.top-nav a:hover { color: var(--code-color); }
 
-/* --- THEME CONTROLS --- */
+/* --- THEME CONTROLS (Hover Dropdown) --- */
 
-/* 1. Toggle Link Style */
+/* Wrapperen holder både linket og dropdownen samlet */
+.theme-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px; /* Lidt "fange-område" så musen kan nå dropdownen */
+    margin-bottom: -10px;
+}
+
+/* Selve linket */
 #theme-toggle-link {
     cursor: pointer;
     color: var(--accent-color);
     font-weight: 500;
     transition: color 0.2s;
     text-decoration: none;
-    margin-right: 5px; /* Lidt luft til dropdown */
+    display: block; /* Vigtigt for positionering */
 }
 #theme-toggle-link:hover { color: var(--highlight-color); }
 
-/* 2. Dropdown Wrapper */
-.theme-selector-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* 3. Dropdown Select Style */
+/* Dropdown menuen - SKJULT SOM STANDARD */
 .theme-select {
+    position: absolute;
+    top: 100%; /* Placerer den lige under linket */
+    right: 0;  /* Juster til højre kant af linket */
+    
+    opacity: 0;             /* Usynlig */
+    visibility: hidden;     /* Kan ikke klikkes */
+    transform: translateY(-10px); /* Lidt oppe */
+    
     appearance: none; 
-    background-color: transparent;
-    border: 1px solid var(--border-color); /* Diskret kant */
-    color: var(--accent-color);
+    background-color: var(--card-bg); /* Baggrundsfarve så den kan læses */
+    border: 1px solid var(--border-color);
+    color: var(--code-color);
     font-family: 'Fira Code', monospace;
-    padding: 3px 8px;
+    padding: 5px 10px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 0.75rem; /* Lidt mindre end teksten */
+    font-size: 0.8rem;
     outline: none;
-    transition: all 0.2s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    min-width: 120px;
 }
-.theme-select:hover, .theme-select:focus {
+
+/* VIGTIGT: Når man holder musen over wrapperen, vis dropdown */
+.theme-wrapper:hover .theme-select {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.theme-select:hover {
     border-color: var(--highlight-color);
-    color: var(--highlight-color);
 }
-.theme-select option {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
+
 
 /* --- HERO SEKTION --- */
 .hero-split {
