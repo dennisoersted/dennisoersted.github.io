@@ -8,20 +8,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 
     <style>
-        /* --- DESIGN SYSTEM --- */
+        /* --- DESIGN SYSTEM (Samme varme farver) --- */
         :root {
-            --bg-color: #f7f5f0; /* En varm 'papir' hvid */
-            --text-color: #2c2420; /* Næsten sort, men varm brunlig */
+            --bg-color: #f7f5f0;
+            --text-color: #2c2420;
             --accent-color: #6e635b;
-            --highlight-color: #a67c52; /* Kobber/Læder farve */
-            --code-color: #d65d0e; /* Tech orange */
+            --highlight-color: #a67c52;
+            --code-color: #d65d0e;
+            /* Ny variabel for det organiske look */
+            --soft-radius: 24px; 
         }
 
-        /* --- ANIMATIONER --- */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -33,16 +37,11 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
-            
-            /* STRUKTUR I BAGGRUNDEN */
-            /* Vi lægger grain.png ovenpå farven med en let gennemsigtighed */
+            /* Den kornede tekstur bevares */
             background-image: url('/assets/grain.png');
             background-repeat: repeat;
-            /* Denne blend-mode gør at støjen 'smelter' ind i farven */
             background-blend-mode: multiply; 
-            
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             overflow-x: hidden;
         }
 
@@ -61,127 +60,137 @@
             font-family: 'Fira Code', monospace;
             font-size: 0.85rem;
         }
-
         .nav-brand { font-weight: 700; color: var(--text-color); text-decoration: none;}
-
         nav.top-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; }
-        nav.top-nav a { 
-            text-decoration: none; color: var(--accent-color); font-weight: 500; transition: color 0.2s; 
-        }
+        nav.top-nav a { text-decoration: none; color: var(--accent-color); font-weight: 500; transition: color 0.2s; }
         nav.top-nav a:hover { color: var(--code-color); }
 
 
-        /* --- SPLIT HERO SEKTION --- */
+        /* --- ORGANISK HERO SEKTION --- */
         .hero-split {
             display: grid;
-            grid-template-columns: 1.2fr 1fr; /* Tekst fylder lidt mere end billedet */
+            grid-template-columns: 1.2fr 1fr;
             gap: 60px;
-            align-items: center; /* Centrerer vertikalt */
+            align-items: center;
             margin-bottom: 100px;
             animation: fadeIn 0.8s ease-out;
         }
 
         .hero-text h1 {
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 3rem; /* Stor og fed overskrift */
-            margin: 0 0 15px 0;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
+            font-family: 'Inter', sans-serif; font-weight: 800; font-size: 3rem;
+            margin: 0 0 15px 0; line-height: 1.1; letter-spacing: -0.03em;
         }
 
         .hero-text .tagline {
-            font-family: 'Fira Code', monospace;
-            color: var(--code-color);
-            font-size: 1rem;
-            margin-bottom: 25px;
-            display: block;
-            min-height: 1.5em;
+            font-family: 'Fira Code', monospace; color: var(--code-color);
+            font-size: 1rem; margin-bottom: 25px; display: block; min-height: 1.5em;
         }
 
         .hero-text .intro-bio {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 1.1rem;
-            color: var(--text-color);
-            opacity: 0.9;
+            font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--text-color); opacity: 0.9;
         }
 
-        .hero-image-container {
-            position: relative;
+        /* Knappen er nu "pille-formet" */
+        .hero-btn {
+            display: inline-block; margin-top: 25px; padding: 12px 28px;
+            background: var(--text-color); color: #fff; text-decoration: none;
+            font-family: 'Fira Code', monospace; font-size: 0.9rem;
+            border-radius: 50px; /* Gør den helt rund */
+            transition: transform 0.2s ease, background 0.2s ease;
         }
+        .hero-btn:hover { transform: translateY(-3px); background: var(--code-color); }
 
+
+        /* Billedet er nu meget mere organisk og blødt */
         .hero-image {
-            width: 100%;
-            height: auto;
-            border-radius: 4px; /* Kun lidt afrundet for et skarpere look */
-            /* En solid skygge giver dybde uden at være 'fluffy' */
-            box-shadow: 20px 20px 0px rgba(166, 124, 82, 0.15); 
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            width: 100%; height: auto;
+            /* Meget afrundede hjørner */
+            border-radius: 40px; 
+            /* Blød, lækker skygge i stedet for den hårde */
+            box-shadow: 0 25px 50px -12px rgba(166, 124, 82, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .hero-image:hover {
-            transform: translate(-5px, -5px);
-            box-shadow: 25px 25px 0px rgba(166, 124, 82, 0.2);
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 35px 60px -15px rgba(166, 124, 82, 0.3);
         }
 
-        /* --- GENERELT INDHOLD --- */
+
+        /* --- INDHOLD & PROJEKTER --- */
         h2 { 
             font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.8rem; 
-            margin-top: 60px; margin-bottom: 30px; 
-            display: flex; align-items: center; gap: 15px;
+            margin-top: 80px; margin-bottom: 40px; display: flex; align-items: center; gap: 15px;
         }
-        
-        /* En tech-streg ved siden af overskrifter */
-        h2::after { content: ''; flex-grow: 1; height: 1px; background: #e0d6c8; }
+        h2::after { content: ''; flex-grow: 1; height: 2px; background: #e0d6c8; border-radius: 2px; }
 
-        /* --- PROJEKT GRID --- */
         #github-projects {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;
         }
 
+        /* Projektkortene er mere runde */
         .project-card {
             background: #fff;
-            border: 1px solid #e0d6c8;
+            border: 2px solid #f2efe9; /* Lidt tykkere, blødere kant */
             padding: 30px;
-            border-radius: 6px;
+            border-radius: var(--soft-radius); /* Organiske hjørner */
             text-decoration: none !important;
             display: flex; flex-direction: column;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* 'Spring' animation */
             position: relative;
         }
         
         .project-card:hover {
-            border-color: var(--code-color);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-color: transparent;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08); /* Blød skygge ved hover */
         }
 
-        .project-card h3 { 
-            font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; margin: 0 0 10px 0; color: #000;
-        }
-        .project-card p { 
-            font-size: 0.95rem; color: var(--accent-color); flex-grow: 1; margin-bottom: 20px;
-        }
-        
+        .project-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; margin: 0 0 10px 0; color: #000;}
+        .project-card p { font-size: 0.95rem; color: var(--accent-color); flex-grow: 1; margin-bottom: 20px;}
         .repo-stats {
             font-family: 'Fira Code', monospace; font-size: 0.75rem;
             color: var(--highlight-color); display: flex; gap: 15px; font-weight: 500;
             border-top: 1px solid #f0f0f0; padding-top: 15px;
         }
 
+
+        /* --- NY KONTAKT SEKTION MED IKONER --- */
+        .contact-section {
+            text-align: center;
+            margin-top: 120px;
+            margin-bottom: 60px;
+        }
+        
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 35px; /* Plads mellem ikoner */
+            margin-top: 30px;
+        }
+
+        .contact-icons a {
+            color: var(--accent-color);
+            font-size: 2.2rem; /* Store ikoner */
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        /* Organisk bevægelse når man peger på ikonerne */
+        .contact-icons a:hover {
+            color: var(--code-color);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+
         /* --- MOBIL --- */
         @media (max-width: 800px) {
-            .hero-split { 
-                grid-template-columns: 1fr; /* En kolonne på mobil */
-                gap: 40px; 
-                text-align: center;
-            }
-            /* På mobil vil vi gerne have billedet øverst */
-            .hero-image-container { order: -1; margin: 0 auto; width: 80%; }
-            .hero-text h1 { font-size: 2.2rem; }
-            h2::after { display: none; } /* Ingen streg på mobil */
+            .hero-split { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .hero-image-container { margin: 0 auto; width: 85%; }
+            .hero-image { border-radius: 30px; } /* Lidt mindre runding på mobil */
+            h2::after { display: none; }
             nav.top-nav { flex-direction: column; gap: 20px; }
+            .contact-icons { gap: 25px; font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -193,26 +202,16 @@
         <a href="/" class="nav-brand">~/dit-navn</a>
         <ul>
             <li><a href="#projekter">Projekter</a></li>
-            <li><a href="#om">Om</a></li>
-            <li><a href="mailto:din@email.dk">Kontakt</a></li>
-            <li><a href="https://github.com/ditnavn" target="_blank">GitHub ↗</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
         </ul>
     </nav>
 
     <section class="hero-split">
         <div class="hero-text">
             <h1>Dit Navn</h1>
-            
-            <span class="tagline">
-                > <span id="typed-text"></span><span style="animation: blink 1s infinite">_</span>
-            </span>
-
-            <div class="intro-bio">
-                {{ content }}
-            </div>
-            
-            <br>
-            <a href="#projekter" style="display: inline-block; padding: 10px 20px; background: var(--text-color); color: #fff; text-decoration: none; font-family: 'Fira Code', monospace; font-size: 0.9rem; border-radius: 4px;">Se mine data →</a>
+            <span class="tagline">> <span id="typed-text"></span><span style="animation: blink 1s infinite">_</span></span>
+            <div class="intro-bio">{{ content }}</div>
+            <a href="#projekter" class="hero-btn">Se mine data →</a>
         </div>
 
         <div class="hero-image-container">
@@ -227,14 +226,30 @@
         </div>
     </section>
 
-    <footer style="margin-top: 80px; text-align: center; color: var(--accent-color); font-size: 0.8rem; font-family: 'Fira Code';">
-        <p>git commit -m "update portfolio"</p>
+    <section id="kontakt" class="contact-section">
+        <h2>Let's Connect</h2>
+        <p style="max-width: 600px; margin: 0 auto;">Find mig på de forskellige platforme, hvis du vil nørde data eller bare sige hej.</p>
+        
+        <div class="contact-icons">
+            <a href="mailto:din@email.dk" title="Send en email"><i class="fa-solid fa-envelope"></i></a>
+            
+            <a href="https://linkedin.com/in/ditbrugernavn" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            
+            <a href="https://github.com/ditbrugernavn" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            
+            <a href="https://facebook.com/ditbrugernavn" target="_blank" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+
+            <a href="https://mastodon.social/@ditbrugernavn" target="_blank" title="Fediverse"><i class="fa-brands fa-mastodon"></i></a>
+        </div>
+    </section>
+
+    <footer style="margin-top: 80px; text-align: center; color: var(--accent-color); font-size: 0.8rem; font-family: 'Fira Code'; opacity: 0.7;">
+        <p>git commit -m "final polish & organic feel"</p>
     </footer>
 
 </div>
 
 <script>
-    // --- TYPEWRITER ---
     const phrases = ['Data Scientist', 'Machine Learning', 'Python Expert', 'Coffee Driven'];
     let phraseIndex = 0, letterIndex = 0, isDeleting = false;
     const textEl = document.getElementById('typed-text');
@@ -242,28 +257,22 @@
     function type() {
         const current = phrases[phraseIndex];
         if (isDeleting) {
-            textEl.textContent = current.substring(0, letterIndex - 1);
-            letterIndex--;
+            textEl.textContent = current.substring(0, letterIndex - 1); letterIndex--;
         } else {
-            textEl.textContent = current.substring(0, letterIndex + 1);
-            letterIndex++;
+            textEl.textContent = current.substring(0, letterIndex + 1); letterIndex++;
         }
-
         if (!isDeleting && letterIndex === current.length) {
-            isDeleting = true;
-            setTimeout(type, 2000); // Vent lidt før sletning
+            isDeleting = true; setTimeout(type, 2000);
         } else if (isDeleting && letterIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            setTimeout(type, 500);
+            isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; setTimeout(type, 500);
         } else {
             setTimeout(type, isDeleting ? 50 : 100);
         }
     }
     document.addEventListener('DOMContentLoaded', type);
 
-    // --- GITHUB WIDGET ---
-    const githubUser = 'DIT-GITHUB-BRUGERNAVN'; // <--- HUSK AT RETTE HER
+    // --- HUSK AT RETTE HER ---
+    const githubUser = 'DIT-GITHUB-BRUGERNAVN'; 
 
     async function getRepos() {
         const container = document.getElementById('github-projects');
