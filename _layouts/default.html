@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <style>
+        /* Minimalistisk CSS inspireret af cnewton.org */
+        body {
+            font-family: "Georgia", "Times New Roman", serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            gap: 60px;
+        }
+        
+        /* Sidebar (Venstre kolonne) */
+        header {
+            width: 220px;
+            flex-shrink: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Sans-serif til menu */
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            margin-top: 0;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li {
+            margin-bottom: 8px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* Indhold (Højre kolonne) */
+        main {
+            flex-grow: 1;
+            max-width: 600px;
+        }
+
+        h2 { font-weight: normal; font-size: 1.5rem; margin-top: 0; }
+        p { margin-bottom: 1.5em; }
+        
+        /* Mobilvisning */
+        @media (max-width: 700px) {
+            body { flex-direction: column; gap: 20px; }
+            header { width: 100%; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Dit Navn</h1>
+        <p style="font-size: 0.9em; color: #888;">Din jobtitel eller en kort 'tagline' her.</p>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Hjem</a></li>
+                <li><a href="/om">Om mig</a></li>
+                <li><a href="mailto:din@email.dk">Kontakt</a></li>
+            </ul>
+        </nav>
+        
+        <br>
+        <nav>
+            <ul>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Twitter/X</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {{ content }}
+    </main>
+
+</body>
+</html>
