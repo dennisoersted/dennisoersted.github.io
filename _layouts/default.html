@@ -87,12 +87,15 @@
         nav.top-nav a { text-decoration: none; color: var(--accent-color); font-weight: 500; transition: color 0.2s; }
         nav.top-nav a:hover { color: var(--code-color); }
         
-        .theme-toggle {
-            background: none; border: none; cursor: pointer;
-            color: var(--accent-color); font-size: 1.1rem;
-            transition: color 0.2s, transform 0.2s; padding: 5px;
+        /* NYT: Theme Switcher Text Link */
+        #theme-toggle-link {
+            cursor: pointer;
+            color: var(--accent-color);
+            font-weight: 500;
+            transition: color 0.2s;
+            text-decoration: none;
         }
-        .theme-toggle:hover { color: var(--highlight-color); transform: rotate(15deg); }
+        #theme-toggle-link:hover { color: var(--highlight-color); }
 
         /* --- HERO SEKTION --- */
         .hero-split {
@@ -178,12 +181,10 @@
         
         <div class="nav-right">
             <ul>
-                <li><a href="#projekter">cd ./projects</a></li>
-                <li><a href="#kontakt">cd ./contact</a></li>
+                <li><a href="#projekter">cd ./projects</a>,</li>
+                <li><a href="#kontakt">cd ./contact</a>,</li>
             </ul>
-            <button class="theme-toggle" id="theme-toggle" title="Skift Dark/Light mode">
-                <i class="fa-solid fa-sun"></i>
-            </button>
+            <a id="theme-toggle-link">./toggle-theme.sh</a>
         </div>
     </nav>
 
@@ -192,8 +193,7 @@
             <h1>Dennis Ørsted Petersen</h1>
             <span class="tagline">> <span id="typed-text"></span><span style="animation: blink 1s infinite">_</span></span>
             <div class="intro-bio">{{ content }}</div>
-            <a href="#projekter" class="hero-btn">cd ./projects →</a>
-        </div>
+            </div>
 
         <div class="hero-image-container">
             <img src="/assets/mig.jpg" alt="Portræt" class="hero-image">
@@ -255,33 +255,23 @@
     }
     document.addEventListener('DOMContentLoaded', type);
 
-    // --- DARK MODE LOGIC ---
-    const toggleBtn = document.getElementById('theme-toggle');
+    // --- DARK MODE LOGIC (RETTET TIL TEKST-LINK) ---
+    const toggleLink = document.getElementById('theme-toggle-link');
     const htmlEl = document.documentElement;
-    const icon = toggleBtn.querySelector('i');
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         htmlEl.setAttribute('data-theme', savedTheme);
-        updateIcon(savedTheme);
-    } else {
-        updateIcon('dark');
-    }
+    } 
 
-    toggleBtn.addEventListener('click', () => {
-        const currentTheme = htmlEl.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        htmlEl.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateIcon(newTheme);
-    });
-
-    function updateIcon(theme) {
-        if (theme === 'light') {
-            icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
-        } else {
-            icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
-        }
+    if (toggleLink) {
+        toggleLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Forhindrer at den hopper
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            htmlEl.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
     }
 
     // --- RANDOM GIT JOKE WIDGET ---
@@ -306,7 +296,6 @@
 
 
     // --- GITHUB PROJECTS WIDGET ---
-    // !!! VIGTIGT: Ret til dit eget brugernavn herunder !!!
     const githubUser = 'dennisoersted'; 
 
     async function getRepos() {
