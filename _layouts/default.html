@@ -8,12 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* --- FARVETEMAER (VARIABLES) --- */
+        /* --- FARVETEMAER --- */
         :root {
-            /* STANDARD: DARK MODE */
+            /* DARK MODE (Standard) */
             --bg-color: #13100e;
             --card-bg: #1c1816;
             --text-color: #e6e0d4;
@@ -23,13 +24,12 @@
             --border-color: #332b26;
             --soft-radius: 24px;
             
-            /* GRAIN INDSTILLINGER FOR DARK MODE */
-            --grain-opacity: 0.05;      /* Lidt tydeligere i dark mode for at kunne ses */
-            --grain-filter: invert(1);  /* GØR STØJEN HVID/LYS */
-            --grain-blend: overlay;     /* Overlay virker bedre med lys støj på mørk baggrund */
+            /* Grain indstillinger for Dark Mode */
+            --grain-opacity: 0.05;
+            --grain-filter: invert(1); /* Gør støjen lys */
         }
 
-        /* LIGHT MODE OVERRIDE */
+        /* LIGHT MODE */
         [data-theme="light"] {
             --bg-color: #f7f5f0;
             --card-bg: #ffffff;
@@ -39,10 +39,9 @@
             --code-color: #d65d0e;
             --border-color: #e0d6c8;
             
-            /* GRAIN INDSTILLINGER FOR LIGHT MODE */
+            /* Grain indstillinger for Light Mode */
             --grain-opacity: 0.08;
-            --grain-filter: none;       /* Ingen invertering (Behold støjen mørk) */
-            --grain-blend: multiply;    /* Multiply er bedst til mørk støj på lys baggrund */
+            --grain-filter: none; /* Mørk støj */
         }
 
         @keyframes fadeIn {
@@ -63,78 +62,54 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* --- GRAIN LAGET --- */
+        /* GRAIN TEXTURE LAYER */
         body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('/assets/grain.png');
-            
-            /* Her sker magien: */
             opacity: var(--grain-opacity); 
-            filter: var(--grain-filter);       /* Inverterer farverne i dark mode */
-            /* mix-blend-mode: var(--grain-blend);  <-- Kan aktiveres hvis man vil eksperimentere, men filter:invert er ofte nok */
-            
-            pointer-events: none;
-            z-index: 500;
+            filter: var(--grain-filter);       
+            pointer-events: none; z-index: 500;
         }
 
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 30px 80px;
-            position: relative;
-            z-index: 1;
+            max-width: 1000px; margin: 0 auto; padding: 40px 30px 80px;
+            position: relative; z-index: 1;
         }
 
-        /* --- NAVIGATION & THEME TOGGLE --- */
+        /* --- NAVIGATION --- */
         nav.top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 60px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
+            display: flex; justify-content: space-between; align-items: center;
+            padding-bottom: 60px; font-family: 'Fira Code', monospace; font-size: 0.85rem;
         }
-
         .nav-brand { font-weight: 700; color: var(--text-color); text-decoration: none;}
-
         .nav-right { display: flex; align-items: center; gap: 30px; }
         nav.top-nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 30px; }
-        
         nav.top-nav a { text-decoration: none; color: var(--accent-color); font-weight: 500; transition: color 0.2s; }
         nav.top-nav a:hover { color: var(--code-color); }
-
-        /* Theme Toggle Button */
+        
         .theme-toggle {
             background: none; border: none; cursor: pointer;
             color: var(--accent-color); font-size: 1.1rem;
-            transition: color 0.2s, transform 0.2s;
-            padding: 5px;
+            transition: color 0.2s, transform 0.2s; padding: 5px;
         }
         .theme-toggle:hover { color: var(--highlight-color); transform: rotate(15deg); }
-
 
         /* --- HERO SEKTION --- */
         .hero-split {
             display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px;
             align-items: center; margin-bottom: 100px; animation: fadeIn 0.8s ease-out;
         }
-
         .hero-text h1 {
             font-family: 'Inter', sans-serif; font-weight: 800; font-size: 3rem;
             margin: 0 0 15px 0; line-height: 1.1; letter-spacing: -0.03em;
         }
-
         .hero-text .tagline {
             font-family: 'Fira Code', monospace; color: var(--code-color);
             font-size: 1rem; margin-bottom: 25px; display: block; min-height: 1.5em;
         }
-
         .hero-text .intro-bio {
             font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--text-color); opacity: 0.9;
         }
-
         .hero-btn {
             display: inline-block; margin-top: 25px; padding: 12px 28px;
             background: var(--text-color); color: var(--bg-color);
@@ -143,7 +118,6 @@
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
         .hero-btn:hover { transform: translateY(-3px); opacity: 0.9; }
-
         .hero-image {
             width: 100%; height: auto; border-radius: 40px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
@@ -151,20 +125,19 @@
         }
         .hero-image:hover { transform: translateY(-5px) scale(1.01); }
 
-        /* --- INDHOLD --- */
+        /* --- HEADINGS --- */
         h2 { 
             font-family: 'Inter', sans-serif; font-weight: 800; font-size: 1.8rem; 
             margin-top: 80px; margin-bottom: 40px; display: flex; align-items: center; gap: 15px;
         }
         h2::after { content: ''; flex-grow: 1; height: 2px; background: var(--border-color); border-radius: 2px; }
 
+        /* --- PROJECTS WIDGET --- */
         #github-projects {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;
         }
-
         .project-card {
-            background: var(--card-bg);
-            border: 2px solid var(--border-color);
+            background: var(--card-bg); border: 2px solid var(--border-color);
             padding: 30px; border-radius: var(--soft-radius);
             text-decoration: none !important; display: flex; flex-direction: column;
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -173,10 +146,8 @@
             border-color: var(--code-color); transform: translateY(-8px);
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
         }
-
         .project-card h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.1rem; margin: 0 0 10px 0; color: var(--text-color);}
         .project-card p { font-size: 0.95rem; color: var(--accent-color); flex-grow: 1; margin-bottom: 20px;}
-        
         .repo-stats {
             font-family: 'Fira Code', monospace; font-size: 0.75rem;
             color: var(--highlight-color); display: flex; gap: 15px; font-weight: 500;
@@ -243,21 +214,26 @@
         </p>
         
         <div class="contact-icons">
-            <a href="mailto:din@email.dk"><i class="fa-solid fa-envelope"></i></a>
-            <a href="https://linkedin.com/in/ditbrugernavn" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://github.com/ditbrugernavn" target="_blank"><i class="fa-brands fa-github"></i></a>
-            <a href="https://mastodon.social/@ditbrugernavn" target="_blank"><i class="fa-brands fa-mastodon"></i></a>
+            <a href="mailto:din@email.dk" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://linkedin.com/in/ditbrugernavn" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/ditbrugernavn" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://instagram.com/ditbrugernavn" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://mastodon.social/@ditbrugernavn" target="_blank" title="Mastodon/Fediverse"><i class="fa-brands fa-mastodon"></i></a>
         </div>
     </section>
 
     <footer style="margin-top: 80px; text-align: center; color: var(--accent-color); font-size: 0.8rem; font-family: 'Fira Code'; opacity: 0.5;">
-        <p>git commit -m "fixed grain contrast"</p>
+        <p>
+            <a id="git-footer" href="#" target="_blank" style="color: inherit; text-decoration: none; border-bottom: 1px dashed var(--accent-color);" title="Play Song 🎵">
+                loading git joke...
+            </a>
+        </p>
     </footer>
 
 </div>
 
 <script>
-    // --- TYPEWRITER ---
+    // --- TYPEWRITER EFFECT ---
     const phrases = ['Data Scientist', 'Machine Learning', 'Python Expert', 'Coffee Driven'];
     let phraseIndex = 0, letterIndex = 0, isDeleting = false;
     const textEl = document.getElementById('typed-text');
@@ -279,7 +255,7 @@
     }
     document.addEventListener('DOMContentLoaded', type);
 
-    // --- DARK MODE LOGIK ---
+    // --- DARK MODE LOGIC ---
     const toggleBtn = document.getElementById('theme-toggle');
     const htmlEl = document.documentElement;
     const icon = toggleBtn.querySelector('i');
@@ -295,7 +271,6 @@
     toggleBtn.addEventListener('click', () => {
         const currentTheme = htmlEl.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
         htmlEl.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateIcon(newTheme);
@@ -303,16 +278,36 @@
 
     function updateIcon(theme) {
         if (theme === 'light') {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+            icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
         } else {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
+            icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
         }
     }
 
-    // --- GITHUB WIDGET (HUSK AT RETTE BRUGERNAVN) ---
-    const githubUser = 'DIT-GITHUB-BRUGERNAVN'; 
+    // --- RANDOM GIT JOKE WIDGET ---
+    const gitJokes = [
+        // Dine forslag
+        { cmd: 'git -mv -on -up', url: 'https://www.youtube.com/watch?v=6Z66wVo7uNw' }, // Curtis Mayfield
+        { cmd: 'git push it --real-good', url: 'https://www.youtube.com/watch?v=vCadcBR95oU' }, // Salt-N-Pepa
+        { cmd: 'git push origin limit --force', url: 'https://www.youtube.com/watch?v=vT8OU5WtfkQ' }, // Scarface
+        { cmd: 'git blame --on-the-boogie', url: 'https://www.youtube.com/watch?v=nqxVMLVe62U' }, // The Jacksons
+        { cmd: 'git branch grapevine', url: 'https://www.youtube.com/watch?v=hajBdDM2qdg' }, // Marvin Gaye
+    ];
+
+    function randomGitJoke() {
+        const footerLink = document.getElementById('git-footer');
+        if (footerLink) {
+            const random = gitJokes[Math.floor(Math.random() * gitJokes.length)];
+            footerLink.innerText = random.cmd;
+            footerLink.href = random.url;
+        }
+    }
+    document.addEventListener('DOMContentLoaded', randomGitJoke);
+
+
+    // --- GITHUB PROJECTS WIDGET ---
+    // !!! VIGTIGT: Ret til dit eget brugernavn herunder !!!
+    const githubUser = 'dennisoersted'; 
 
     async function getRepos() {
         const container = document.getElementById('github-projects');
