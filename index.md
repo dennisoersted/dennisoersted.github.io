@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Dennis Ørsted Petersen
+title: ~/dennisoersted
 ---
 
 I balance my studies in Data Science at SDU with a position as an HR Consultant at OUH.
