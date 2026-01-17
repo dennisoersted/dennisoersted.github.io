@@ -1,33 +1,42 @@
----
-permalink: /404.html
-layout: default
-title: 404 - System Error
----
-
-<div style="text-align: center; padding: 100px 0;">
-    <h1 style="font-size: 6rem; color: var(--code-color); margin-bottom: 10px; line-height: 1;">404</h1>
+<!DOCTYPE html>
+<html lang="da" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - System Error</title>
     
-    <div style="font-family: 'Fira Code', monospace; font-size: 1.1rem; color: var(--text-color); background: var(--card-bg); display: inline-block; padding: 20px 30px; border-radius: var(--soft-radius); border: 1px solid var(--border-color); text-align: left;">
-        <span style="color: var(--accent-color);"># Debug log:</span><br>
-        > Status: <span style="color: #ff5555;">404</span><br>
-        > sudo find /page ... searching ... Error: Directory is empty. ¯\_(ツ)_/¯<br>
-        >  Please return to root (~)<span style="animation: blink 1s infinite">_</span>
-    </div>
-    
-    <div style="margin-top: 40px;">
-        <a href="/" class="hero-btn">cd ~ (Home)</a>
-    </div>
-</div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center;">
 
-<script>
-    // Skjuler forside-elementer så vi kan genbruge layoutet
-    document.addEventListener('DOMContentLoaded', () => {
-        const hero = document.querySelector('.hero-split');
-        const projects = document.querySelector('#projekter');
-        const contact = document.querySelector('#kontakt');
+    <div class="container">
         
-        if(hero) hero.style.display = 'none';
-        if(projects) projects.style.display = 'none';
-        if(contact) contact.style.display = 'none';
-    });
-</script>
+        <h1 style="font-size: 6rem; color: var(--code-color); margin-bottom: 10px; line-height: 1;">404</h1>
+        
+        <div style="font-family: 'Fira Code', monospace; font-size: 1.1rem; color: var(--text-color); background: var(--card-bg); display: inline-block; padding: 30px; border-radius: var(--soft-radius); border: 1px solid var(--border-color); text-align: left; max-width: 500px;">
+            <span style="color: var(--accent-color);"># Debug log:</span><br><br>
+            > Status: <span style="color: #ff5555;">Critical Failure</span><br>
+            > Message: "It works on my machine..." ¯\_(ツ)_/¯<br>
+            > Action: Return to safe harbor.<span style="animation: blink 1s infinite">_</span>
+        </div>
+        
+        <div style="margin-top: 40px;">
+            <a href="/" class="hero-btn">cd ~ (Home)</a>
+        </div>
+
+    </div>
+
+    <script>
+        // Henter gemt tema, så 404-siden har samme farve som resten
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    </script>
+
+</body>
+</html>
