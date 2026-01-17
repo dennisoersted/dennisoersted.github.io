@@ -5,12 +5,14 @@ title: 404 - System Error
 ---
 
 <div style="text-align: center; padding: 100px 0;">
-    <h1 style="font-size: 4rem; color: var(--code-color); margin-bottom: 20px;">404</h1>
-    <p style="font-family: 'Fira Code', monospace; font-size: 1.2rem; color: var(--text-color);">
-        > Error: Page not found<br>
-        > The requested URL was not found on this server.<br>
-        > <span style="animation: blink 1s infinite">_</span>
-    </p>
+    <h1 style="font-size: 6rem; color: var(--code-color); margin-bottom: 10px; line-height: 1;">404</h1>
+    
+    <div style="font-family: 'Fira Code', monospace; font-size: 1.1rem; color: var(--text-color); background: var(--card-bg); display: inline-block; padding: 20px 30px; border-radius: var(--soft-radius); border: 1px solid var(--border-color); text-align: left;">
+        <span style="color: var(--accent-color);"># Debug log:</span><br>
+        > Status: <span style="color: #ff5555;">404</span><br>
+        > sudo find /page ... searching ... Error: Directory is empty. ¯\_(ツ)_/¯<br>
+        >  Please return to root (~)<span style="animation: blink 1s infinite">_</span>
+    </div>
     
     <div style="margin-top: 40px;">
         <a href="/" class="hero-btn">cd ~ (Home)</a>
@@ -18,8 +20,7 @@ title: 404 - System Error
 </div>
 
 <script>
-    // Fjerner hero og projekter fra 404 siden, hvis de er hardcoded i default.html
-    // Dette er et lille hack, så vi kan genbruge dit layout uden at lave et nyt.
+    // Skjuler forside-elementer så vi kan genbruge layoutet
     document.addEventListener('DOMContentLoaded', () => {
         const hero = document.querySelector('.hero-split');
         const projects = document.querySelector('#projekter');
@@ -27,6 +28,6 @@ title: 404 - System Error
         
         if(hero) hero.style.display = 'none';
         if(projects) projects.style.display = 'none';
-        // if(contact) contact.style.display = 'none'; // Behold kontakt hvis du vil
+        if(contact) contact.style.display = 'none';
     });
 </script>
