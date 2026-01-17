@@ -5,7 +5,7 @@ description: Portfolio for Dennis Ørsted Petersen - Data Science Student & HR C
 baseurl: ""
 
 # VIGTIGT: Ret denne til dit valgte hoved-domæne (det samme som i CNAME)
-url: "https://dennisoersted.dk"
+url: "https://dennisoersted.github.io"
 
 # --- PLUGINS ---
 # Dette sikrer at sitemap.xml bliver dannet automatisk
