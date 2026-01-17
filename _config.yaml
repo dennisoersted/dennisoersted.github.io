@@ -1,3 +1,17 @@
-title: Dit Navn - Data & Code
-description: En personlig portfolio med fokus på data science, algoritmer og digitale løsninger.
-url: "https://dennisoersted.github.io"
+# --- SITE SETTINGS ---
+title: Dennis Ørsted Petersen
+email: dennisoersted@gmail.com
+description: Portfolio for Dennis Ørsted Petersen - Data Science Student & HR Consultant.
+baseurl: ""
+
+# VIGTIGT: Ret denne til dit valgte hoved-domæne (det samme som i CNAME)
+url: "https://dennisoersted.dk"
+
+# --- PLUGINS ---
+# Dette sikrer at sitemap.xml bliver dannet automatisk
+plugins:
+  - jekyll-sitemap
+
+# --- AUTHOR ---
+author:
+  name: Dennis Ørsted Petersen

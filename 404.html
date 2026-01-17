@@ -1,0 +1,32 @@
+---
+permalink: /404.html
+layout: default
+title: 404 - System Error
+---
+
+<div style="text-align: center; padding: 100px 0;">
+    <h1 style="font-size: 4rem; color: var(--code-color); margin-bottom: 20px;">404</h1>
+    <p style="font-family: 'Fira Code', monospace; font-size: 1.2rem; color: var(--text-color);">
+        > Error: Page not found<br>
+        > The requested URL was not found on this server.<br>
+        > <span style="animation: blink 1s infinite">_</span>
+    </p>
+    
+    <div style="margin-top: 40px;">
+        <a href="/" class="hero-btn">cd ~ (Home)</a>
+    </div>
+</div>
+
+<script>
+    // Fjerner hero og projekter fra 404 siden, hvis de er hardcoded i default.html
+    // Dette er et lille hack, så vi kan genbruge dit layout uden at lave et nyt.
+    document.addEventListener('DOMContentLoaded', () => {
+        const hero = document.querySelector('.hero-split');
+        const projects = document.querySelector('#projekter');
+        const contact = document.querySelector('#kontakt');
+        
+        if(hero) hero.style.display = 'none';
+        if(projects) projects.style.display = 'none';
+        // if(contact) contact.style.display = 'none'; // Behold kontakt hvis du vil
+    });
+</script>
