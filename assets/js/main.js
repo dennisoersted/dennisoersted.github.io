@@ -66,11 +66,14 @@ if (themeSelect) {
 
 // --- RANDOM GIT JOKE ---
 const gitJokes = [
-    { cmd: 'git -mv -on -up', url: 'https://www.youtube.com/watch?v=6Z66wVo7uNw' }, 
+    { cmd: 'git -mv -on -up', url: 'https://www.youtube.com/watch?v=A9RMr9KuVZo' }, 
     { cmd: 'git push it --real-good', url: 'https://www.youtube.com/watch?v=vCadcBR95oU' }, 
-    { cmd: 'git push origin limit --force', url: 'https://www.youtube.com/watch?v=vT8OU5WtfkQ' }, 
+    { cmd: 'git push origin limit --force', url: 'https://www.youtube.com/watch?v=Olgn9sXNdl0' }, 
     { cmd: 'git blame --on-the-boogie', url: 'https://www.youtube.com/watch?v=nqxVMLVe62U' }, 
-    { cmd: 'git branch grapevine', url: 'https://www.youtube.com/watch?v=hajBdDM2qdg' }, 
+    { cmd: 'git branch grapevine', url: 'https://www.youtube.com/watch?v=ixqofv-Oi74' }, 
+    { cmd: 'git pull --me-closer-tiny-dancer', url: 'https://www.youtube.com/watch?v=yYcyacLRPNs' },
+    { cmd: 'git checkout --any-time-you-like', url: 'https://www.youtube.com/watch?v=09839DpTctU' },
+    { cmd: 'git merge --come-together', url: 'https://www.youtube.com/watch?v=45cYwDMibGo' },
 ];
 
 function randomGitJoke() {
