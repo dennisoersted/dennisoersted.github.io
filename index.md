@@ -2,11 +2,12 @@
 layout: default
 title: ~/dennisoersted
 ---
+Data Science student at [SDU](https://sdu.dk)*) and an HR consultant at [OUH](https://ouh.dk)*)
 
-Numbers tell a story, but people give them meaning.
+I have a background in social work and 10+ years of experience in employment law and negotiations, spanning both trade unions and the last six years in HR. I am now focused on bringing data-driven analysis to the human side of the workplace. My goal is to use data science to improve the quality of decision-making and bridge the gap between hard data and human relations.
 
-I work at the intersection of Data Science (*where I’m pursuing my Master’s at [SDU](https://sdu.dk)*) and Human Resources (*where I work at [OUH](https://ouh.dk)*). With a background in social work, I spend my time figuring out how to connect hard metrics with human needs.
+My current work focuses on experimenting with RAG solutions for large knowledge bases, alongside data mining and machine learning projects.
 
-My focus is on using Data Science disciplines —specifically **Machine Learning** and **RAG/GraphRAG** architectures— to structure unstructured data and support better decision-making. My goal is to ensure that large datasets create meaningful impact for small teams and individuals.
+I am proficient in Python, R, SQL, Web Development (HTML/CSS/JS), Git, and Docker, among other tools.
 
-Below is a collection of my GitHub projects showing what I’ve been building lately. If this mix of **people and Python** sounds interesting to you, feel free to [reach out](#kontakt)!
+Below is a collection of my GitHub projects showing what I’ve been building lately. Feel free to reach out [reach out](#kontakt)!
